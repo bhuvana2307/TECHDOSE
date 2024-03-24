@@ -1,0 +1,14 @@
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        prev_sum = {}
+        total_sum = 0
+        count = 0
+        for num in nums:
+            total_sum += num
+            if total_sum == k:
+                count += 1
+            remainder = total_sum - k
+            if remainder in prev_sum:
+                count += prev_sum[remainder]
+            prev_sum[total_sum] = prev_sum.get(total_sum, 0) + 1
+        return count
